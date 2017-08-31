@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    #container {
+      height: 3000px;
+      width: auto;
+    }
+    #foo {
+      margin-top: 200px;
+      float: right;
+      height: 1000px;
+      width: 500px;
+      background-color: #777;
+      display: block;
+    }
+    .rightWrap {
+      float: right;
+      width: 500px;
+    }
+    .paramWrap {
+      float: left;
+      width: 600px;
+      height: 450px;
+      background: #aabbee;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div class="paramWrap">
+
+    </div>
+    <div class="rightWrap">
+      <div id="foo"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    window.addEventListener('scroll', winScroll);
+    var fixDiv = document.querySelector('#foo');
+    var viewHeight = document.documentElement.clientHeight;
+    var bodyScrollHeight = document.body.scrollTop;
+    var fixDivBottom = bodyScrollHeight + fixDiv.getBoundingClientRect().bottom;
+    var fixDivTop = bodyScrollHeight + fixDiv.getBoundingClientRect().top;
+    var dis = fixDivBottom - viewHeight;
+
+    function winScroll(e) {
+
+      bodyScrollHeight = document.body.scrollTop;
+
+      if (dis > 0) {
+        if (bodyScrollHeight > dis) {
+          fixDiv.style.position = "fixed";
+          fixDiv.style.top = -dis + "px";
+        } else {
+          fixDiv.style.position = "static";
+          fixDiv.style.top = null;
+        }
+      } else {
+        if(bodyScrollHeight > fixDivTop){
+          fixDiv.style.position = "fixed";
+          fixDiv.style.top = -fixDivTop + "px";
+        }else{
+          fixDiv.style.position = "static";
+          fixDiv.style.top = null;
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>
